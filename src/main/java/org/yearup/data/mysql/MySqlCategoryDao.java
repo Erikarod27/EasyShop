@@ -6,12 +6,12 @@ import org.yearup.data.CategoryDao;
 import org.yearup.models.Category;
 
 import javax.sql.DataSource;
-import java.beans.Statement;
+//import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-//import java.sql.Statement;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +65,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
 
         try (Connection connection = getConnection();
              //Missing some stuff
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, category.getName());
             statement.setString(2, category.getDescription());
             statement.executeUpdate();
