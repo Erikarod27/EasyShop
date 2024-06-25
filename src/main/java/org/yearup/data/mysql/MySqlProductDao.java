@@ -24,11 +24,6 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         List<Product> products = new ArrayList<>();
         List<Object> params = new ArrayList<>();
 
-//        String sql = "SELECT * FROM products " +
-//                "WHERE (category_id = ? OR ? = -1) " +
-//                "   AND (price <= ? OR ? = -1) " +
-//                "   AND (color = ? OR ? = '') ";
-
         String sql = "SELECT * FROM products WHERE 1=1";
 
         if (categoryId != null) {
@@ -51,20 +46,9 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
             params.add(color);
         }
 
-//        categoryId = categoryId == null ? -1 : categoryId;
-//        minPrice = minPrice == null ? new BigDecimal("-1") : minPrice;
-//        maxPrice = maxPrice == null ? new BigDecimal("-1") : maxPrice;
-//        color = color == null ? "" : color;
-
         try (Connection connection = getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql);
-//            statement.setInt(1, categoryId);
-//            statement.setInt(2, categoryId);
-//            statement.setBigDecimal(3, minPrice);
-//            statement.setBigDecimal(4, minPrice);
-//            statement.setString(5, color);
-//            statement.setString(6, color);
             for (int i = 0; i < params.size(); i++){
                 statement.setObject(i+1, params.get(i));
             }
