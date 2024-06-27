@@ -32,12 +32,12 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         }
 
         if (minPrice != null && minPrice.compareTo(BigDecimal.ZERO) > 0) {
-            sql += " AND min_price = ?";
+            sql += " AND price >= ?";
             params.add(minPrice);
         }
 
         if (maxPrice != null && maxPrice.compareTo(BigDecimal.ZERO) > 0) {
-            sql += " AND max_price = ?";
+            sql += " AND price <= ?";
             params.add(maxPrice);
         }
 
